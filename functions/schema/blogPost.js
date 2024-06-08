@@ -1,3 +1,4 @@
+// schema/blogPost.js
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
@@ -16,4 +17,4 @@ const blogPostSchema = new Schema({
     date: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('BlogPost', blogPostSchema);
+module.exports = blogPostSchema;

@@ -1,3 +1,4 @@
+// routes/blogPost.js
 const express = require('express');
 const BlogPostModel = require('../models/blogPost');
 
@@ -9,7 +10,7 @@ router.get('/', async (req, res) => {
         const { category, tag } = req.query;
         let filter = {};
         if (category) filter.category = category;
-        if (tag) filter.tags = tag;
+        if (tag) filter.tags = { $in: [tag] };
         const posts = await BlogPostModel.find(filter);
         res.json(posts);
     } catch (err) {

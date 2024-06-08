@@ -19,5 +19,5 @@ mongoose
     .then(() => console.log('Connected to MongoDB'))
     .catch((error) => console.error('Failed to connect to MongoDB', error));
 
-app.use('/.netlify/functions/api', router);
+app.use('/.netlify/functions/api/blogPosts', router);
 module.exports.handler = serverless(app);
