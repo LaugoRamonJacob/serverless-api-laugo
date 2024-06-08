@@ -39,6 +39,26 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.post('/:id/comments', async (req, res) => {
+    try {
+        const { user, content } = req.body;
+        if (!user || !content) {
+            return res.status(400).json({ message: 'User and content are required' });
+        }
+
+        const blogPost = await BlogPostModel.findById(req.params.id);
+        if (!blogPost) {
+            return res.status(404).json({ message: 'Blog post not found' });
+        }
+
+        blogPost.comments.push({ user, content });
+        await blogPost.save();
+        res.status(201).json(blogPost);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 // Update an existing blog post
 router.put('/:id', getBlogPost, async (req, res) => {
     try {
